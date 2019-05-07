@@ -1,0 +1,98 @@
+{
+    "title": "vs",
+    "description": "This API returns data regarding the descriptions of almost all nouns in vedic literature. The results are JSON objects that contain the word transliterated to roman, the word in nagari, the meaning of the word, and the category the word belongs to.",
+    "docsUrl": "https://aninditabasu.github.io/indica/",
+    "url": "https://api.apis.guru/v2/specs/sheetlabs.com/vedic-society/1.1/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://sheetlabs.com/IND/vs",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "get_": {
+            "main": "./lib/actions/get_.js",
+            "title": "Fetch all records from the database",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_category": {
+            "main": "./lib/actions/get_category.js",
+            "title": "Fetch all words in a specific category",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_category.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_description": {
+            "main": "./lib/actions/get_description.js",
+            "title": "Fetch all meanings that contain a specific string",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_description.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "get_word": {
+            "main": "./lib/actions/get_word.js",
+            "title": "Fetch the meaning of a specific word",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/get_word.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
